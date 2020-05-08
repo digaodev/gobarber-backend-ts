@@ -1,6 +1,6 @@
 import { Router } from 'express';
+import { hash } from 'bcryptjs';
 
-import AppointmentsRepository from '../repositories/AppointmentsRepository';
 import CreateUserService from '../services/CreateUserService';
 
 const usersRouter = Router();
@@ -11,7 +11,15 @@ usersRouter.post('/', async (request, response) => {
 
     const createUser = new CreateUserService();
 
-    const newUser = await createUser.execute({ name, email, password });
+    const hashedPassword = await hash(password, 10);
+
+    const newUser = await createUser.execute({
+      name,
+      email,
+      password: hashedPassword,
+    });
+
+    delete newUser.password;
 
     return response.json(newUser);
   } catch (error) {
