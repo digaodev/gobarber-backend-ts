@@ -14,9 +14,7 @@
   <a href="https://www.linkedin.com/in/rodrigorb/" target="_blank" rel="noopener noreferrer">
     <img alt="Made by" src="https://img.shields.io/badge/made%20by-digaodev-%23FF9000">
   </a>
-
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/digaodev/gobarber-backend-ts?color=%23FF9000">
-
+  
   <a href="https://github.com/digaodev/gobarber-backend-ts/commits/master">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/digaodev/gobarber-backend-ts?color=%23FF9000">
   </a>
