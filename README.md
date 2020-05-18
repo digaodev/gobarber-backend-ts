@@ -28,13 +28,6 @@
   <img alt="GitHub" src="https://img.shields.io/github/license/digaodev/gobarber-backend-ts?color=%23FF9000">
 </p>
 
-<p align="center">
-  <a href="#%EF%B8%8F-about-the-project">About the project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-getting-started">Getting started</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-license">License</a>
-</p>
-
 ## About the project
 
 This repository contains the backend api consumed by the web and mobile applications for the GoBarber project, a way to organize appointments for barbers and their customers.
@@ -58,11 +51,13 @@ These are the main techs used in this project:
 
 Import the `Insomnia.json` on the Insomnia App or click on [Run in Insomnia](#insomniaButton) button below
 
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=GoBarberAPIv2&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fdigaodev%2Fgobarber-backend-ts%2Fmaster%2Fdocs%2FInsomnia.json)
+
 ### Requirements
 
 - [Node.js](https://nodejs.org/en/)
 - [Yarn](https://classic.yarnpkg.com/) or [npm](https://www.npmjs.com/)
-- A running instance of [PostgreSQL](https://www.postgresql.org/)(try using docker for an easier database setup)
+- A running instance of [PostgreSQL](https://www.postgresql.org/) (try using docker for an easier database setup)
 
 **Clone the project and access the folder**
 
