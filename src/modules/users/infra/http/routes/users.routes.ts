@@ -3,14 +3,14 @@ import { hash } from 'bcryptjs';
 import multer from 'multer';
 
 // Services
-import CreateUserService from '../services/CreateUserService';
-import UpdateUserAvatarService from '../services/UpdateUserAvatarService';
+import CreateUserService from '@modules/users/services/CreateUserService';
+import UpdateUserAvatarService from '@modules/users/services/UpdateUserAvatarService';
 
 // Middlewares
-import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 
 // Utils
-import uploadConfig from '../config/upload';
+import uploadConfig from '@config/upload';
 
 const upload = multer(uploadConfig);
 

@@ -1,10 +1,10 @@
 import { getRepository } from 'typeorm';
 
 // Models
-import User from '../models/User';
+import User from '@modules/users/infra/typeorm/entities/User';
 
 // Utils
-import AppError from '../errors/AppError';
+import AppError from '@shared/errors/AppError';
 
 interface Request {
   name: string;
