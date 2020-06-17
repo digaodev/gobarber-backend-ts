@@ -35,6 +35,10 @@
         "argsIgnorePattern": "_"
       }
     ],
+    "@typescript-eslint/interface-name-prefix": [
+      "error",
+      { "prefixWithI": "always" }
+    ],
     "comma-dangle": "off",
     "import/extensions": [
       "error",
