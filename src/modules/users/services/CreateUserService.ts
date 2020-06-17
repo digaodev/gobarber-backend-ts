@@ -1,34 +1,28 @@
-import { getRepository } from 'typeorm';
-
-// Models
 import User from '@modules/users/infra/typeorm/entities/User';
-
-// Utils
+import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import AppError from '@shared/errors/AppError';
 
-interface Request {
+interface IRequest {
   name: string;
   email: string;
   password: string;
 }
 
 class CreateUserService {
-  public async execute({ name, email, password }: Request): Promise<User> {
-    const usersRepository = getRepository(User);
+  constructor(private usersRepository: IUsersRepository) {}
 
-    const userExists = await usersRepository.findOne({ where: { email } });
+  public async execute({ name, email, password }: IRequest): Promise<User> {
+    const userExists = await this.usersRepository.findByEmail(email);
 
     if (userExists) {
       throw new AppError('Email address already exists.');
     }
 
-    const newUser = usersRepository.create({
+    const newUser = await this.usersRepository.create({
       name,
       email,
       password,
     });
-
-    await usersRepository.save(newUser);
 
     return newUser;
   }
