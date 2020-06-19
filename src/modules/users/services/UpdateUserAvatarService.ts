@@ -1,10 +1,9 @@
-import path from 'path';
-import fs from 'fs';
 import { inject, injectable } from 'tsyringe';
 
 import User from '@modules/users/infra/typeorm/entities/User';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
-import uploadConfig from '@config/upload';
+import IStorageProvider from '@shared/container/providers/StorageProvider/models/IStorageProvider';
+
 import AppError from '@shared/errors/AppError';
 
 interface IRequest {
@@ -17,6 +16,9 @@ class UpdateUserAvatarService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+
+    @inject('StorageProvider')
+    private storageProvider: IStorageProvider,
   ) {}
 
   public async execute({ user_id, avatarFilename }: IRequest): Promise<User> {
@@ -30,16 +32,13 @@ class UpdateUserAvatarService {
     }
 
     if (user.avatar) {
-      // Delete previous avatar file
-      const userAvatarFilePath = path.join(uploadConfig.directory, user.avatar);
-      const userAvatarFileExists = await fs.promises.stat(userAvatarFilePath);
-      if (userAvatarFileExists) {
-        await fs.promises.unlink(userAvatarFilePath);
-      }
+      await this.storageProvider.deleteFile(user.avatar);
     }
 
+    const filename = await this.storageProvider.saveFile(avatarFilename);
+
     // update the current user instance
-    user.avatar = avatarFilename;
+    user.avatar = filename;
 
     await this.usersRepository.save(user);
 
