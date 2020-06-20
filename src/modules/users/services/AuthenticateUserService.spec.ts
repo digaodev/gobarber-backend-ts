@@ -30,9 +30,6 @@ describe('CreateUser', () => {
       password,
     });
 
-    expect(createdUser).toHaveProperty('id');
-    expect(createdUser.name).toBe(name);
-
     const response = await authenticateUserService.execute({
       email,
       password,
@@ -54,7 +51,7 @@ describe('CreateUser', () => {
     const email = 'johndoe@gmail.com';
     const password = '123456';
 
-    expect(
+    await expect(
       authenticateUserService.execute({
         email,
         password,
@@ -79,16 +76,13 @@ describe('CreateUser', () => {
     const email = 'johndoe@gmail.com';
     const password = '123456';
 
-    const createdUser = await createUser.execute({
+    await createUser.execute({
       name,
       email,
       password,
     });
 
-    expect(createdUser).toHaveProperty('id');
-    expect(createdUser.name).toBe(name);
-
-    expect(
+    await expect(
       authenticateUserService.execute({
         email,
         password: 'wrongpassword',

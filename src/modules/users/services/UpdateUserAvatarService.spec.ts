@@ -45,7 +45,7 @@ describe('UpdateUserAvatar', () => {
 
     const avatarFilename = 'fakeAvatar.jpg';
 
-    expect(
+    await expect(
       updateUserAvatar.execute({
         user_id: 'non-existing-id',
         avatarFilename,
