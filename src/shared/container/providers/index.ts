@@ -3,8 +3,8 @@ import { container } from 'tsyringe';
 import IStorageProvider from './StorageProvider/models/IStorageProvider';
 import DiskStorageProvider from './StorageProvider/implementations/DiskStorageProvider';
 
-// import IMailProvider from './MailProvider/models/IMailProvider';
-// import MailProvider from './MailProvider/implementations/IMailProvider';
+import IMailProvider from './MailProvider/models/IMailProvider';
+import EtherealMailProvider from './MailProvider/implementations/EtherealMailProvider';
 
 // TODO: add condition for dev | prod envs
 container.registerSingleton<IStorageProvider>(
@@ -12,7 +12,7 @@ container.registerSingleton<IStorageProvider>(
   DiskStorageProvider,
 );
 
-// container.registerSingleton<IMailProvider>(
-//   'MailProvider',
-//   MailProvider,
-// );
+container.registerInstance<IMailProvider>(
+  'MailProvider',
+  new EtherealMailProvider(),
+);
