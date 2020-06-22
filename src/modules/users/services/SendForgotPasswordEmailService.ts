@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe';
 
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
+import ISendMailDTO from '@shared/container/providers/MailProvider/dtos/ISendMailDTO';
 import AppError from '@shared/errors/AppError';
 import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';
 
@@ -31,10 +32,22 @@ class SendForgotPasswordEmailService {
 
     const { token } = await this.userTokensRepository.generate(user.id);
 
-    await this.mailProvider.sendMail(
-      email,
-      `Pedido de recuperação de senha: ${token}`,
-    );
+    const emailData: ISendMailDTO = {
+      to: {
+        name: user.name,
+        email: user.email,
+      },
+      subject: '[GoBarber] Recuperação de senha',
+      templateData: {
+        template: 'Olá {{name}}. O seu token é {{token}}',
+        variables: {
+          name: user.name,
+          token,
+        },
+      },
+    };
+
+    await this.mailProvider.sendMail(emailData);
   }
 }
 
