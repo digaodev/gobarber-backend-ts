@@ -98,6 +98,16 @@ describe('UpdateUserAvatar', () => {
     expect(updatedUser.password).toBe(updatedPassword);
   });
 
+  it('should NOT be able to update the profile for a non-existing user', async () => {
+    await expect(
+      updateUserProfile.execute({
+        user_id: 'non-existing-user-id',
+        name: 'Jonh Doe',
+        email: 'johndoe@gmail.com',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
   it('should NOT be able to update the password without informing the old password', async () => {
     const name = 'John Doe';
     const email = 'johndoe@gmail.com';
