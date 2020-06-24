@@ -9,7 +9,7 @@ import AuthenticateUserService from './AuthenticateUserService';
 let fakeUsersRepository: FakeUsersRepository;
 let fakeHashProvider: FakeHashProvider;
 let createUser: CreateUserService;
-let authenticateUserService: AuthenticateUserService;
+let authenticateUser: AuthenticateUserService;
 
 describe('AuthenticateUser', () => {
   beforeEach(() => {
@@ -17,7 +17,7 @@ describe('AuthenticateUser', () => {
     fakeHashProvider = new FakeHashProvider();
 
     createUser = new CreateUserService(fakeUsersRepository, fakeHashProvider);
-    authenticateUserService = new AuthenticateUserService(
+    authenticateUser = new AuthenticateUserService(
       fakeUsersRepository,
       fakeHashProvider,
     );
@@ -34,7 +34,7 @@ describe('AuthenticateUser', () => {
       password,
     });
 
-    const response = await authenticateUserService.execute({
+    const response = await authenticateUser.execute({
       email,
       password,
     });
@@ -48,7 +48,7 @@ describe('AuthenticateUser', () => {
     const password = '123456';
 
     await expect(
-      authenticateUserService.execute({
+      authenticateUser.execute({
         email,
         password,
       }),
@@ -67,7 +67,7 @@ describe('AuthenticateUser', () => {
     });
 
     await expect(
-      authenticateUserService.execute({
+      authenticateUser.execute({
         email,
         password: 'wrongpassword',
       }),
