@@ -1,5 +1,5 @@
 import { inject, injectable } from 'tsyringe';
-import { getHours } from 'date-fns';
+import { getHours, isAfter } from 'date-fns';
 
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
 
@@ -45,7 +45,20 @@ class ListProviderDayAvailabilityService {
       (_, index) => index + hourStart,
     );
 
+    const currentDate = new Date(Date.now());
+
     const availability = eachHourArray.map(hour => {
+      const appointmentDate = new Date(year, month - 1, day, hour);
+
+      // an appointment can only be booked in the future
+      if (isAfter(currentDate, appointmentDate)) {
+        return {
+          hour,
+          available: false,
+        };
+      }
+
+      // with a valid appointment date, check if it is already booked
       const appointmentsInHour = appointments.find(
         ap => getHours(ap.date) === hour,
       );
