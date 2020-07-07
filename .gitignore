@@ -1,6 +1,8 @@
 temp/*
 !temp/.gitkeep
 
+ormconfig.json
+
 # Logs
 logs
 *.log
