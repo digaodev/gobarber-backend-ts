@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import UpdateUserProfileService from '@modules/users/services/UpdateUserProfileService';
 import ShowUserProfileService from '@modules/users/services/ShowUserProfileService';
@@ -15,7 +16,7 @@ class ProfileController {
         user_id: userId,
       });
 
-      return response.json(user);
+      return response.json(classToClass(user));
     } catch (error) {
       return response.status(400).json({ error: error.message });
     }
@@ -37,9 +38,7 @@ class ProfileController {
         old_password,
       });
 
-      delete updatedUser.password;
-
-      return response.json(updatedUser);
+      return response.json(classToClass(updatedUser));
     } catch (error) {
       return response.status(400).json({ error: error.message });
     }
