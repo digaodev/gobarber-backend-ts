@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
+import { errors } from 'celebrate';
 import 'express-async-errors';
 
 import '@shared/infra/typeorm';
@@ -15,6 +16,8 @@ app.use(express.json());
 app.use('/files', express.static(uploadConfig.uploadsFolder));
 app.use(cors());
 app.use(routes);
+
+app.use(errors); // celebrate error middleware
 
 app.use(
   (error: Error, request: Request, response: Response, _: NextFunction) => {
