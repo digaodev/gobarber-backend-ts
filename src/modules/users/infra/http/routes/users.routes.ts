@@ -7,7 +7,7 @@ import UserAvatarController from '@modules/users/infra/http/controllers/UserAvat
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 import uploadConfig from '@config/upload';
 
-const upload = multer(uploadConfig);
+const upload = multer(uploadConfig.multer);
 
 const usersRouter = Router();
 const usersController = new UsersController();

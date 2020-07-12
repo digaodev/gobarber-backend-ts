@@ -43,9 +43,11 @@ class AuthenticateUserService {
       throw new AppError('Invalid user or password.', 401);
     }
 
-    const token = sign({}, authConfig.jwt.secret, {
+    const { expiresIn, secret } = authConfig.jwt;
+
+    const token = sign({}, secret, {
       subject: user.id,
-      expiresIn: authConfig.jwt.expiresIn,
+      expiresIn,
     });
 
     return { user, token };
